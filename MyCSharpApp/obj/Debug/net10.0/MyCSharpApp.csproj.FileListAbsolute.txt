@@ -1,0 +1,15 @@
+/workspaces/in-the-Army../MyCSharpApp/bin/Debug/net10.0/MyCSharpApp
+/workspaces/in-the-Army../MyCSharpApp/bin/Debug/net10.0/MyCSharpApp.deps.json
+/workspaces/in-the-Army../MyCSharpApp/bin/Debug/net10.0/MyCSharpApp.runtimeconfig.json
+/workspaces/in-the-Army../MyCSharpApp/bin/Debug/net10.0/MyCSharpApp.dll
+/workspaces/in-the-Army../MyCSharpApp/bin/Debug/net10.0/MyCSharpApp.pdb
+/workspaces/in-the-Army../MyCSharpApp/obj/Debug/net10.0/MyCSharpApp.GeneratedMSBuildEditorConfig.editorconfig
+/workspaces/in-the-Army../MyCSharpApp/obj/Debug/net10.0/MyCSharpApp.AssemblyInfoInputs.cache
+/workspaces/in-the-Army../MyCSharpApp/obj/Debug/net10.0/MyCSharpApp.AssemblyInfo.cs
+/workspaces/in-the-Army../MyCSharpApp/obj/Debug/net10.0/MyCSharpApp.csproj.CoreCompileInputs.cache
+/workspaces/in-the-Army../MyCSharpApp/obj/Debug/net10.0/MyCSharpApp.sourcelink.json
+/workspaces/in-the-Army../MyCSharpApp/obj/Debug/net10.0/MyCSharpApp.dll
+/workspaces/in-the-Army../MyCSharpApp/obj/Debug/net10.0/refint/MyCSharpApp.dll
+/workspaces/in-the-Army../MyCSharpApp/obj/Debug/net10.0/MyCSharpApp.pdb
+/workspaces/in-the-Army../MyCSharpApp/obj/Debug/net10.0/MyCSharpApp.genruntimeconfig.cache
+/workspaces/in-the-Army../MyCSharpApp/obj/Debug/net10.0/ref/MyCSharpApp.dll
