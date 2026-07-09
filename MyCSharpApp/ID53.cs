@@ -20,6 +20,8 @@ class ID53
         }
         Console.WriteLine(sum);
 
+
+        // 현명하게 등비수열로 구하는 방법(더 효율적)
         // N이 매우 클 수 있으므로 long으로 받습니다.
         long N2 = long.Parse(Console.ReadLine()!);
 
