@@ -22,6 +22,8 @@ class ID52
             xnum -= (ynum-1)/2;
         }
         Console.WriteLine($"현재 xnum = {xnum}, ynum = {ynum}");
+
+        //분자 분모 구하고 펙토리얼 약분으로 계산하는중 
         long MOD = 1000000007;
         (long max, long min) = (xnum>ynum)?(xnum, ynum): (ynum,xnum); long bunja=1; long bunmo=1; 
         for(int i=1; i <= min; i++)
@@ -30,6 +32,7 @@ class ID52
             bunmo = (bunmo * i) % MOD;
         }
         
+        //거듭 제곱법으로 페르마 소정리 이용 모듈러 역수 계산중
         long @base = 1;
         long temp = bunmo;
         for(int i = 0; i<=30; i++)
@@ -41,6 +44,7 @@ class ID52
             temp = (temp*temp)%MOD;
         }
         Console.WriteLine($"현재 @base = {@base}, bunja = {bunja}");
+        // 답 계산
         long ans = (bunja*@base)%MOD;
         Console.WriteLine(ans);
     }
