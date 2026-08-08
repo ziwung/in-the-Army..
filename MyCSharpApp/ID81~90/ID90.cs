@@ -1,49 +1,67 @@
-using System;
-using System.Linq;
-class ID90
-{
-    static int Product(int m)
-    {
-        if (m == 0)
-        {
-            return 0;
-        }
-        int sum = 1;
-        while (m > 0)
-        {
-            sum *= m%10;
-            m /= 10;
-        }
-        return sum;
-    }
-    static void func(List<int> nums, long m) // N이 10^11이므로 m은 long형이 안전합니다.
-    {   
-        if (m > 100000000000L) // 조건 범위에 맞춰 조정
-        {
-            return;
-        }
-        nums.Add((int)m); // 생성된 후보를 리스트에 추가
-        int current = (int)(m % 10);
-        for(int i = current; i<10; i++)
-        {
-            func(nums, m*10+i);
-        }
-    }   
-    static void Main()
-    {
-        int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        int N = input[0];
-        int B = input[1];
-        int count= 0;
-        List<int> nums = new List<int>();
-        func(nums, B);
-        foreach(int m in nums)
-        {
-            if (m == Product(m) + B && m<N)
-            {
-                count++;
-            }
-        }
-        Console.WriteLine(count);
-    }
-}
+// using System;
+// using System.Collections.Generic;
+// using System.Linq;
+
+// class ID90
+// {
+//     static long Product(long m)
+//     {
+//         if (m == 0) return 0;
+//         long sum = 1;
+//         while (m > 0)
+//         {
+//             sum *= m % 10;
+//             m /= 10;
+//         }
+//         return sum;
+//     }
+
+// // 파이썬의 func와 정확히 대응되는 구조 (자릿수 depth 기준)
+//     static void FindFmCand(int digit, long m, HashSet<long> fm_cand)
+//     {
+//         // N이 10^11 이하이므로 자릿수는 최대 11자리(또는 12자리)까지 탐색
+//         if (digit == 11) 
+//         {
+//             fm_cand.Add(Product(m));
+//             return;
+//         }
+
+//         // 11자리가 되기 전이라도 중간중간 완성되는 수들의 곱을 넣고 싶다면 여기서 추가 가능
+//         if (digit > 0)
+//         {
+//             fm_cand.Add(Product(m));
+//         }
+
+//         int minValue = (m == 0) ? 1 : (int)(m % 10);
+
+//         for (int i = minValue; i <= 9; i++)
+//         {
+//             FindFmCand(digit + 1, m * 10 + i, fm_cand);
+//         }
+//     }
+
+//     static void Main()
+//     {
+//         long[] input = Console.ReadLine()!.Split(' ').Select(long.Parse).ToArray();
+//         long N = input[0];
+//         long B = input[1];
+
+//         HashSet<long> fm_cand = new HashSet<long>();
+        
+//         // 탐색 시작 (digit=0, m=0)
+//         FindFmCand(0, 0, fm_cand);
+
+//         long answer = 0;
+//         foreach (long fm in fm_cand)
+//         {
+//             long m = fm + B;
+//             long prodM = Product(m);
+//             if (m - prodM == B && m <= N)
+//             {
+//                 answer++;
+//             }
+//         }
+
+//         Console.WriteLine(answer);
+//     }
+// }
