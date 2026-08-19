@@ -78,21 +78,22 @@ class Q07
         //     sum += Date[i];
         //     Console.WriteLine($"{i}일차 참가자 수 : {sum}");
         // }
-        // B07
-        int T = int.Parse(Console.ReadLine()!);
-        int N = int.Parse(Console.ReadLine()!);
-        int[] Time = new int[T+1];
-        for(int i = 0; i<N; i++)
-        {
-            int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-            Time[input[0]] += 1;
-            Time[input[1]] -= 1;
-        }
-        int sum = 0;
-        for(int i = 0; i<T; i++)
-        {
-            sum += Time[i];
-            Console.WriteLine($"{i}시30분 일하는 종업원 수 : {sum}");
-        }
+        // // B07
+        // int T = int.Parse(Console.ReadLine()!);
+        // int N = int.Parse(Console.ReadLine()!);
+        // int[] Time = new int[T+1];
+        // for(int i = 0; i<N; i++)
+        // {
+        //     int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+        //     Time[input[0]] += 1;
+        //     Time[input[1]] -= 1;
+        // }
+        // int sum = 0;
+        // for(int i = 0; i<T; i++)
+        // {
+        //     sum += Time[i];
+        //     Console.WriteLine($"{i}시30분 일하는 종업원 수 : {sum}");
+        // }
+        // // 아 이름 잘못 커밋했넹
     }
 }
