@@ -1,34 +1,34 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
-class Q15{
-    static void Main(){
-        // A15 근데 이거 1초 초과하긴함..
-        int[] A = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        int[] arank = A.OrderBy(n=>n).ToArray();
-        List<int> a = new List<int>(); a.Add(arank[0]);
-        for(int i=1; i<A.Length; i++)
-        {
-            if(arank[i] != arank[i - 1])
-            {
-                a.Add(arank[i]);
-            }
-        }
-        int[] ans = new int[A.Length];int count = 1;
-        for(int i = 0; i<a.Count; i++)
-        {
-            for(int j = 0; j<A.Length; j++)
-            {
-                if(a[i] == A[j]) ans[j] = count;
-            }
-            count++;
-        }
-        for(int j = 0; j<A.Length; j++)
-        {
-            Console.WriteLine(ans[j]);
-        }
-    }
-}
+// using System;
+// using System.Linq;
+// using System.Collections.Generic;
+// class Q15{
+//     static void Main(){
+//         // A15 근데 이거 1초 초과하긴함..
+//         int[] A = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         int[] arank = A.OrderBy(n=>n).ToArray();
+//         List<int> a = new List<int>(); a.Add(arank[0]);
+//         for(int i=1; i<A.Length; i++)
+//         {
+//             if(arank[i] != arank[i - 1])
+//             {
+//                 a.Add(arank[i]);
+//             }
+//         }
+//         int[] ans = new int[A.Length];int count = 1;
+//         for(int i = 0; i<a.Count; i++)
+//         {
+//             for(int j = 0; j<A.Length; j++)
+//             {
+//                 if(a[i] == A[j]) ans[j] = count;
+//             }
+//             count++;
+//         }
+//         for(int j = 0; j<A.Length; j++)
+//         {
+//             Console.WriteLine(ans[j]);
+//         }
+//     }
+// }
 // class Q14
 // {
 //     static void Main()
