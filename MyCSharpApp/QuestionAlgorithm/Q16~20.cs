@@ -2,83 +2,126 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Runtime.Intrinsics.Arm;
-class Q19
-{
-    static void Main()
-    {
-        //  // A19
-        // int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        // int N = input[0]; int W = input[1]; List<int>[] prod = new List<int>[N];
-        // for(int i = 0; i<N; i++)
-        // {
-        //     int[] input2 = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        //     prod[i] = new List<int>();
-        //     prod[i].Add(input2[0]);
-        //     prod[i].Add(input2[1]);
-        // }
-        // int[,] dp = new int[N+1,W+1];
-        // for(int i = 1; i<N+1; i++)
-        // {
-        //     int curriwei = prod[i-1][0];
-        //     for(int j = 1; j < W+1; j++)
-        //     {
-        //         if(curriwei <= j)
-        //         {
-        //             dp[i,j] = Math.Max(dp[i-1,j-curriwei]+prod[i-1][1],dp[i-1,j]);
-        //         }else dp[i,j] = dp[i-1,j]; 
+using System.Drawing;
+// class Q20
+// {
+//     // // A20
+//     // static void Main()
+//     // {
+//     //     string a = Console.ReadLine()!;
+//     //     string b = Console.ReadLine()!;
+//     //     int[,] dp = new int[a.Length+1,b.Length+1];
+//     //     for(int i = 1; i<a.Length+1; i++)
+//     //     {
+//     //         for(int j = 1; j<b.Length+1; j++)
+//     //         {
+//     //             if(a[i - 1] == b[j - 1]){
+//     //                 int max = Math.Max(dp[i-1,j],dp[i,j-1]);
+//     //                 dp[i,j] = Math.Max(max,dp[i-1,j-1]+1);
+//     //             }else dp[i,j] = Math.Max(dp[i-1,j],dp[i,j-1]);
+//     //         }
+//     //     } 
+//     //     Console.WriteLine(dp[a.Length,b.Length]);
+//     // }
+
+//     // // B20
+//     // // 자만하지 말자
+//     // static void Main(){
+//     //     string a = Console.ReadLine()!; int al = a.Length;
+//     //     string b = Console.ReadLine()!; int bl = b.Length;
+//     //     int[,] dp=new int[al+1,bl+1];
+//     //     for(int i = 1; i < al+1; i++) dp[i,0] = i;
+//     //     for(int j = 1; j < bl+1; j++) dp[0,j] = j;
+//     //     for(int i = 1; i < al+1; i++)
+//     //     {
+//     //         for(int j = 1; j < bl+1; j++)
+//     //         {
+//     //             int min = Math.Min(dp[i-1,j],dp[i,j-1]);
+//     //             min = Math.Min(min,dp[i-1,j-1]);
+//     //             if (a[i - 1] == b[j - 1])dp[i,j] = dp[i-1,j-1];
+//     //             else dp[i,j] = min+1;
+//     //         }
+//     //     }
+//     //     Console.WriteLine(dp[al,bl]);
+//     // }
+// }
+// class Q19
+// {
+//     static void Main()
+//     {
+//         //  // A19
+//         // int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         // int N = input[0]; int W = input[1]; List<int>[] prod = new List<int>[N];
+//         // for(int i = 0; i<N; i++)
+//         // {
+//         //     int[] input2 = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         //     prod[i] = new List<int>();
+//         //     prod[i].Add(input2[0]);
+//         //     prod[i].Add(input2[1]);
+//         // }
+//         // int[,] dp = new int[N+1,W+1];
+//         // for(int i = 1; i<N+1; i++)
+//         // {
+//         //     int curriwei = prod[i-1][0];
+//         //     for(int j = 1; j < W+1; j++)
+//         //     {
+//         //         if(curriwei <= j)
+//         //         {
+//         //             dp[i,j] = Math.Max(dp[i-1,j-curriwei]+prod[i-1][1],dp[i-1,j]);
+//         //         }else dp[i,j] = dp[i-1,j]; 
                  
-        //     }
-        // }
-        // int ans = 0;
-        // for(int i = 0; i<W+1; i++) Math.Max(ans,dp[N,i]);
-        // Console.WriteLine(ans);
+//         //     }
+//         // }
+//         // int ans = 0;
+//         // for(int i = 0; i<W+1; i++) Math.Max(ans,dp[N,i]);
+//         // Console.WriteLine(ans);
 
-        // B19
-var input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        int N = input[0]; 
-        long W = input[1];
-        int[] weights = new int[N];
-        int[] values = new int[N];
-        int maxPossibleValue = 0;
-        for (int i = 0; i < N; i++)
-        {
-            var item = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-            weights[i] = item[0];
-            values[i] = item[1];
-            maxPossibleValue += values[i];
-        }
-        // dp[v] = 가치 v를 만들기 위한 최소 무게
-        long[] dp = new long[maxPossibleValue + 1];
-        Array.Fill(dp, long.MaxValue);
-        dp[0] = 0; // 가치 0을 만드는 데 필요한 무게는 0
+//         // B19
+// var input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         int N = input[0]; 
+//         long W = input[1];
+//         int[] weights = new int[N];
+//         int[] values = new int[N];
+//         int maxPossibleValue = 0;
+//         for (int i = 0; i < N; i++)
+//         {
+//             var item = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//             weights[i] = item[0];
+//             values[i] = item[1];
+//             maxPossibleValue += values[i];
+//         }
+//         // dp[v] = 가치 v를 만들기 위한 최소 무게
+//         long[] dp = new long[maxPossibleValue + 1];
+//         Array.Fill(dp, long.MaxValue);
+//         dp[0] = 0; // 가치 0을 만드는 데 필요한 무게는 0
 
-        for (int i = 0; i < N; i++)
-        {
-            int w = weights[i];
-            int v = values[i];
+//         for (int i = 0; i < N; i++)
+//         {
+//             int w = weights[i];
+//             int v = values[i];
 
-            for (int j = maxPossibleValue; j >= v; j--)
-            {
-                if (dp[j - v] != long.MaxValue)
-                {
-                    dp[j] = Math.Min(dp[j], dp[j - v] + w);
-                }
-            }
-        }
+//             for (int j = maxPossibleValue; j >= v; j--)
+//             {
+//                 if (dp[j - v] != long.MaxValue)
+//                 {
+//                     dp[j] = Math.Min(dp[j], dp[j - v] + w);
+//                 }
+//             }
+//         }
 
-        // 무게가 W 이하인 경우 중 가장 큰 가치 찾기
-        int ans = 0;
-        for (int i = 0; i <= maxPossibleValue; i++)
-        {
-            if (dp[i] <= W)
-            {
-                ans = i;
-            }
-        }
+//         // 무게가 W 이하인 경우 중 가장 큰 가치 찾기
+//         int ans = 0;
+//         for (int i = 0; i <= maxPossibleValue; i++)
+//         {
+//             if (dp[i] <= W)
+//             {
+//                 ans = i;
+//             }
+//         }
 
-        Console.WriteLine(ans);
-    }
-}
+//         Console.WriteLine(ans);
+//     }
+// }
 // class Q18
 // {
 //     static void Main()
