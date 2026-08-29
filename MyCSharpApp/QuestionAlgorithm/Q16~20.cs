@@ -1,74 +1,176 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-class Q18
+using System.Runtime.Intrinsics.Arm;
+class Q19
 {
     static void Main()
     {
-        // // A18 (내 풀이 최대최소에서만 이 방식이 유효함 이런경우에는 참거짓 dp가 맞음)
+        //  // A19
         // int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        // int[] A = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        // int N = input[0]; int S = input[1];
-        // int[,] dp = new int[N+1,S+1];
-
+        // int N = input[0]; int W = input[1]; List<int>[] prod = new List<int>[N];
+        // for(int i = 0; i<N; i++)
+        // {
+        //     int[] input2 = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+        //     prod[i] = new List<int>();
+        //     prod[i].Add(input2[0]);
+        //     prod[i].Add(input2[1]);
+        // }
+        // int[,] dp = new int[N+1,W+1];
         // for(int i = 1; i<N+1; i++)
         // {
-        //     for(int j = 1; j<S+1; j++)
+        //     int curriwei = prod[i-1][0];
+        //     for(int j = 1; j < W+1; j++)
         //     {
-        //         if(j<A[i-1]){
-        //             dp[i,j] = dp[i-1,j];
-        //         }
-        //         else
+        //         if(curriwei <= j)
         //         {
-        //             dp[i,j] = dp[i-1,j-A[i-1]]+A[i-1];
-        //         }
+        //             dp[i,j] = Math.Max(dp[i-1,j-curriwei]+prod[i-1][1],dp[i-1,j]);
+        //         }else dp[i,j] = dp[i-1,j]; 
+                 
         //     }
         // }
-        // if(dp[N,S] == S)
-        // {
-        //     Console.WriteLine("Yes");
-        // }else Console.WriteLine("No");
-        // // 찐고수의 풀이(bool dp)
-        // int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        // int[] A = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        // int N = input[0]; 
-        // int S = input[1];
+        // int ans = 0;
+        // for(int i = 0; i<W+1; i++) Math.Max(ans,dp[N,i]);
+        // Console.WriteLine(ans);
 
-        // // dp[i, j]: i번째까지 수를 사용하여 합 j를 만들 수 있는지 여부
-        // bool[,] dp = new bool[N + 1, S + 1];
+        // B19
+var input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+        int N = input[0]; 
+        long W = input[1];
+        int[] weights = new int[N];
+        int[] values = new int[N];
+        int maxPossibleValue = 0;
+        for (int i = 0; i < N; i++)
+        {
+            var item = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+            weights[i] = item[0];
+            values[i] = item[1];
+            maxPossibleValue += values[i];
+        }
+        // dp[v] = 가치 v를 만들기 위한 최소 무게
+        long[] dp = new long[maxPossibleValue + 1];
+        Array.Fill(dp, long.MaxValue);
+        dp[0] = 0; // 가치 0을 만드는 데 필요한 무게는 0
 
-        // // 합이 0인 경우는 항상 만들 수 있음 (공집합)
-        // for (int i = 0; i <= N; i++)
-        // {
-        //     dp[i, 0] = true;
-        // }
+        for (int i = 0; i < N; i++)
+        {
+            int w = weights[i];
+            int v = values[i];
 
-        // for (int i = 1; i <= N; i++)
-        // {
-        //     int currentVal = A[i - 1];
-        //     for (int j = 1; j <= S; j++)
-        //     {
-        //         // 1. i번째 수를 쓰지 않고 이전 상태 그대로 가져오는 경우
-        //         dp[i, j] = dp[i - 1, j];
+            for (int j = maxPossibleValue; j >= v; j--)
+            {
+                if (dp[j - v] != long.MaxValue)
+                {
+                    dp[j] = Math.Min(dp[j], dp[j - v] + w);
+                }
+            }
+        }
 
-        //         // 2. i번째 수를 사용할 수 있는 경우 (현재 만드려는 합 j가 현재 수보다 크거나 같을 때)
-        //         if (j >= currentVal)
-        //         {
-        //             dp[i, j] = dp[i - 1, j] || dp[i - 1, j - currentVal];
-        //         }
-        //     }
-        // }
+        // 무게가 W 이하인 경우 중 가장 큰 가치 찾기
+        int ans = 0;
+        for (int i = 0; i <= maxPossibleValue; i++)
+        {
+            if (dp[i] <= W)
+            {
+                ans = i;
+            }
+        }
 
-        // if (dp[N, S])
-        // {
-        //     Console.WriteLine("Yes");
-        // }
-        // else
-        // {
-        //     Console.WriteLine("No");
-        // }
+        Console.WriteLine(ans);
     }
 }
+// class Q18
+// {
+//     static void Main()
+//     {
+//         // // A18 (내 풀이 최대최소에서만 이 방식이 유효함 이런경우에는 참거짓 dp가 맞음)
+//         // int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         // int[] A = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         // int N = input[0]; int S = input[1];
+//         // int[,] dp = new int[N+1,S+1];
+//         // for(int i = 1; i<N+1; i++)
+//         // {
+//         //     for(int j = 1; j<S+1; j++)
+//         //     {
+//         //         if(j<A[i-1]){
+//         //             dp[i,j] = dp[i-1,j];
+//         //         }
+//         //         else
+//         //         {
+//         //             dp[i,j] = dp[i-1,j-A[i-1]]+A[i-1];
+//         //         }
+//         //     }
+//         // }
+//         // if(dp[N,S] == S)
+//         // {
+//         //     Console.WriteLine("Yes");
+//         // }else Console.WriteLine("No");
+
+//         // // 찐고수의 풀이(bool dp)
+//         // int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         // int[] A = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         // int N = input[0]; 
+//         // int S = input[1];
+//         // bool[] dp = new bool[S + 1]; dp[0] = true;
+//         // for (int i = 1; i <= N; i++)
+//         // {
+//         //     int currentVal = A[i - 1];
+//         //     for (int j = S; j >= currentVal; j--)
+//         //     {
+//         //         if (dp[j - currentVal])
+//         //         {
+//         //             dp[j] = true;
+//         //         }
+//         //     }
+//         // }
+//         // if (dp[S])
+//         // {
+//         //     Console.WriteLine("Yes");
+//         // }
+//         // else
+//         // {
+//         //     Console.WriteLine("No");
+//         // }
+
+//         // // B18
+//         // int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         // int[] A = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         // int N = input[0]; 
+//         // int S = input[1];
+//         // bool[] dp = new bool[S + 1]; dp[0] = true;
+//         // for (int i = 1; i <= N; i++)
+//         // {
+//         //     int currentVal = A[i - 1];
+//         //     for (int j = S; j >= currentVal; j--)
+//         //     {
+//         //         if (dp[j - currentVal])
+//         //         {
+//         //             dp[j] = true;
+//         //         }
+//         //     }
+//         // }
+//         // int curri = S; List<int> ans = new List<int>(); ans.Add(curri);
+//         // // 지금 잘못구현해놨는데 Stack 컬랙션으로 선택한거 Pop하면서 찾아야 할듯..
+//         // while(curri > 0)
+//         // {
+//         //     int i = 0; bool isfound = true;
+//         //     while(isfound)
+//         //     {
+//         //         if(dp[curri - A[i]])
+//         //         {
+//         //             curri = curri - A[i];
+//         //             ans.Add(A[i]);
+//         //             isfound = false;
+//         //         }
+//         //         i++;
+//         //     }
+//         // }
+//         // for(int i = ans.Count-1; i>=0; i--)
+//         // {
+//         //     Console.WriteLine(ans[i]);
+//         // }
+//     }
+// }
 // class Q17
 // {
 //     static void Main()
