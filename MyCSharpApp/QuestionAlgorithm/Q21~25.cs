@@ -1,47 +1,148 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-class Q23
+class Q29
 {
-    // A23 (비트 dp)
     static void Main()
     {
-        int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        int n = input[0]; int m = input[1]; int[,] A = new int[m,n];
-        for(int i =0; i<m; i++)
+        int n = int.Parse(Console.ReadLine()!);
+        int[] a = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+        List<int> L = new List<int>(); L.Add(a[0]); 
+        int large = 0;
+        for(int i = 1; i<n; i++)
         {
-            int[] input1 = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-            for(int j = 0; j<n; j++)
+            if(L[large] < a[i])
             {
-                A[i,j] = input1[j];
+                L.Add(a[i]);
+                large ++;
+            }
+            else
+            {
+                BinarySearch(L,a[i]);
             }
         }
-        int n1 = (int)Math.Pow(2,n)-1;
-        int[,] dp = new int[m+1,n1+1];
-        for(int i = 0; i<m+1; i++)
-            for(int j = 0; j<n1+1; j++) dp[i,j] = 100;
-        dp[0,0] = 0;
-        for(int i = 1; i<=m; i++)
+        Console.WriteLine(L.Count);
+    }
+    static void BinarySearch(List<int> L, int a)
+    {
+        int top = L.Count-1; int bot = 0; int mid = (top+bot)/2;;
+        while (top > bot)
         {
-            for(int j = 0; j<=n1; j++)
+            if(L[mid] >= a)
             {
-                int[] already = new int[n];
-                for(int k = 0; k<n; k++){
-                    if((j & (1<<k)) != 0)already[k] = 1;
-                }
-                int sum = 0;
-                for(int k = 0; k < n; k++){
-                    if(already[k] == 1 || A[i-1,k] == 1)
-                    {
-                        sum += (int)Math.Pow(2,k);
-                    }
-                }
-
-                dp[i,j] = Math.Min(dp[i-1,j], dp[i,j]);
-                dp[i,sum] = Math.Min(dp[i-1,j]+1, dp[i,sum]);
-            }   
+                top = mid;
+            }
+            else
+            {
+                bot = mid +1;
+            }
+            mid = (top+bot)/2;
         }
-        Console.WriteLine(dp[m,n1]);
+        L[mid] = a;
+    }
+}
+
+// class Q23
+// {
+//     static void Main()
+//     {
+//         // // A23 (비트 dp)
+//         // int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         // int n = input[0]; int m = input[1]; int[,] A = new int[m,n];
+//         // for(int i =0; i<m; i++)
+//         // {
+//         //     int[] input1 = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         //     for(int j = 0; j<n; j++)
+//         //     {
+//         //         A[i,j] = input1[j];
+//         //     }
+//         // }
+//         // int n1 = (int)Math.Pow(2,n)-1;
+//         // int[,] dp = new int[m+1,n1+1];
+//         // for(int i = 0; i<m+1; i++)
+//         //     for(int j = 0; j<n1+1; j++) dp[i,j] = 100;
+//         // dp[0,0] = 0;
+//         // for(int i = 1; i<=m; i++)
+//         // {
+//         //     for(int j = 0; j<=n1; j++)
+//         //     {
+//         //         int[] already = new int[n];
+//         //         for(int k = 0; k<n; k++){
+//         //             if((j & (1<<k)) != 0)already[k] = 1;
+//         //         }
+//         //         int sum = 0;
+//         //         for(int k = 0; k < n; k++){
+//         //             if(already[k] == 1 || A[i-1,k] == 1)
+//         //             {
+//         //                 sum += (int)Math.Pow(2,k);
+//         //             }
+//         //         }
+//         //         dp[i,j] = Math.Min(dp[i-1,j], dp[i,j]);
+//         //         dp[i,sum] = Math.Min(dp[i-1,j]+1, dp[i,sum]);
+//         //     }   
+//         // }
+//         // Console.WriteLine(dp[m,n1]);
+
+//     //     // B23
+//     //     int n = int.Parse(Console.ReadLine()!);
+//     //     Nod[] nods = new Nod[n];
+//     //     for(int i = 0; i<n; i++)
+//     //     {
+//     //         int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//     //         nods[i].X = input[0];
+//     //         nods[i].Y = input[1];
+//     //     }
+//     //     int[,] dist = new int[n,n];
+//     //     for(int i = 0; i<n; i++)
+//     //     {
+//     //         for(int j = 0; j<n; j++)
+//     //         {
+//     //             dist[i,j] = nods[i].NodLength(nods[j]);
+//     //         }
+//     //     }
+//     //     int[,] dp = new int[(1<<n),n];
+//     //     for(int i = 0; i<(1<<n); i++)
+//     //         for(int j = 0; j<n; j++) dp[i,j] = -1;
+//     //     int ans = TSP(1,0,dp, n,dist);
+//     //     Console.WriteLine(ans);
+        
+//     // }
+//     // static int TSP(int mask, int now, int[,] dp, int n, int[,] dist)
+//     // {
+//     //     if(mask == (1 << n) - 1)
+//     //     {
+//     //         return dist[now,0];
+//     //     }
+//     //     if(dp[mask,now] != -1)
+//     //     {
+//     //         return dp[mask,now];
+//     //     }
+//     //     int minCost = 1000000;
+//     //     for(int v = 0; v < n; v++)
+//     //     {
+//     //         if ((mask & (1 << v))==0)
+//     //         {
+//     //             int currentCost = dist[now, v] + TSP(mask | (1 << v), v,dp,n,dist);
+//     //             minCost = Math.Min(minCost, currentCost);
+//     //         }
+//     //     }
+//     //     return dp[mask,now] = minCost;
+//     }
+// }
+class Nod
+{
+    public int X {get; set;}
+    public int Y {get; set;}
+
+    public Nod(int x, int y)
+    {
+        X = x;
+        Y = y;
+    }
+    public int NodLength(Nod a)
+    {
+        int ans = (int)Math.Sqrt(Math.Pow(a.X-X,2) + Math.Pow(a.Y-Y,2));
+        return ans;
     }
 }
 
