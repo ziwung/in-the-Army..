@@ -1,27 +1,48 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-class Q29
+class Q24
 {
     static void Main()
     {
-        int n = int.Parse(Console.ReadLine()!);
-        int[] a = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        List<int> L = new List<int>(); L.Add(a[0]); 
-        int large = 0;
-        for(int i = 1; i<n; i++)
-        {
-            if(L[large] < a[i])
-            {
-                L.Add(a[i]);
-                large ++;
-            }
-            else
-            {
-                BinarySearch(L,a[i]);
-            }
+        // // A24
+        // int n = int.Parse(Console.ReadLine()!);
+        // int[] a = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+        // List<int> L = new List<int>(); L.Add(a[0]); 
+        // int large = 0;
+        // for(int i = 1; i<n; i++)
+        // {
+        //     if(L[large] < a[i])
+        //     {
+        //         L.Add(a[i]);
+        //         large ++;
+        //     }
+        //     else
+        //     {
+        //         BinarySearch(L,a[i]);
+        //     }
+        // }
+        // Console.WriteLine(L.Count);
+
+        // B24
+        int n = int.Parse(Console.ReadLine()!); // 입력
+        int[] x = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+        int[] y = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+        //구현
+        var tmp = new (int x, int y)[n]; //튜플을 사용한 세련된 풀이법 
+        for (int i = 0; i < n; i++) {
+            tmp[i] = (x[i], y[i]);
         }
-        Console.WriteLine(L.Count);
+        var sortedTmp = tmp.OrderBy(p => p.x) // X 기준 오름차순
+            .ThenByDescending(p => p.y) // Y 기준 내림차순
+            .ToArray();
+        int[] A = new int[n];
+        for(int i = 0; i<n; i++)
+        {
+            A[i] = sortedTmp[i].y;
+        }
+        int ans = BinarySearch2(A);
+        Console.WriteLine(ans);
     }
     static void BinarySearch(List<int> L, int a)
     {
@@ -39,6 +60,25 @@ class Q29
             mid = (top+bot)/2;
         }
         L[mid] = a;
+    }
+    static int BinarySearch2(int[] L)
+    {
+        int nl = L.Length;
+        List<int> a = new List<int>(); a.Add(L[0]);
+        int large = 0;
+        for(int i = 1; i<nl; i++)
+        {
+            if(a[large] < L[i])
+            {
+                a.Add(L[i]);
+                large ++;
+            }
+            else
+            {
+                BinarySearch(a,L[i]);
+            }
+        }
+        return a.Count();
     }
 }
 
