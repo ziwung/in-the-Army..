@@ -1,86 +1,120 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
-class Q24
+class Q25
 {
     static void Main()
     {
-        // // A24
-        // int n = int.Parse(Console.ReadLine()!);
-        // int[] a = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        // List<int> L = new List<int>(); L.Add(a[0]); 
-        // int large = 0;
-        // for(int i = 1; i<n; i++)
-        // {
-        //     if(L[large] < a[i])
-        //     {
-        //         L.Add(a[i]);
-        //         large ++;
-        //     }
-        //     else
-        //     {
-        //         BinarySearch(L,a[i]);
-        //     }
-        // }
-        // Console.WriteLine(L.Count);
-
-        // B24
-        int n = int.Parse(Console.ReadLine()!); // 입력
-        int[] x = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        int[] y = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        //구현
-        var tmp = new (int x, int y)[n]; //튜플을 사용한 세련된 풀이법 
-        for (int i = 0; i < n; i++) {
-            tmp[i] = (x[i], y[i]);
-        }
-        var sortedTmp = tmp.OrderBy(p => p.x) // X 기준 오름차순
-            .ThenByDescending(p => p.y) // Y 기준 내림차순
-            .ToArray();
-        int[] A = new int[n];
-        for(int i = 0; i<n; i++)
+        int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+        int H = input[0];
+        int W = input[1];
+        string[] C = new string[H];
+        for(int i = 0; i < H; i++)
         {
-            A[i] = sortedTmp[i].y;
+            string input1 = Console.ReadLine()!;
+            C[i] = input1;
         }
-        int ans = BinarySearch2(A);
-        Console.WriteLine(ans);
-    }
-    static void BinarySearch(List<int> L, int a)
-    {
-        int top = L.Count-1; int bot = 0; int mid = (top+bot)/2;;
-        while (top > bot)
+        int[,] dp = new int[H,W];
+        for(int i = 0; i<H; i++) 
         {
-            if(L[mid] >= a)
-            {
-                top = mid;
-            }
-            else
-            {
-                bot = mid +1;
-            }
-            mid = (top+bot)/2;
+            if(C[i][0] == '#') break;
+            dp[i,0] = 1;
         }
-        L[mid] = a;
-    }
-    static int BinarySearch2(int[] L)
-    {
-        int nl = L.Length;
-        List<int> a = new List<int>(); a.Add(L[0]);
-        int large = 0;
-        for(int i = 1; i<nl; i++)
+        for(int i = 0; i<W; i++)
         {
-            if(a[large] < L[i])
+            if(C[0][i] == '#') break;
+            dp[0,i] = 1;  
+        } 
+        for(int i=1; i<H; i++)
+        {
+            for(int j=1; j<W; j++)
             {
-                a.Add(L[i]);
-                large ++;
-            }
-            else
-            {
-                BinarySearch(a,L[i]);
+                if(C[i][j] == '.') dp[i,j] = dp[i-1,j]+dp[i,j-1];
             }
         }
-        return a.Count();
+        Console.WriteLine(dp[H-1,W-1]);
     }
 }
+// class Q24
+// {
+//     static void Main()
+//     {
+//         // // A24
+//         // int n = int.Parse(Console.ReadLine()!);
+//         // int[] a = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         // List<int> L = new List<int>(); L.Add(a[0]); 
+//         // int large = 0;
+//         // for(int i = 1; i<n; i++)
+//         // {
+//         //     if(L[large] < a[i])
+//         //     {
+//         //         L.Add(a[i]);
+//         //         large ++;
+//         //     }
+//         //     else
+//         //     {
+//         //         BinarySearch(L,a[i]);
+//         //     }
+//         // }
+//         // Console.WriteLine(L.Count);
+
+//         // B24
+//         int n = int.Parse(Console.ReadLine()!); // 입력
+//         int[] x = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         int[] y = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         //구현
+//         var tmp = new (int x, int y)[n]; //튜플을 사용한 세련된 풀이법 
+//         for (int i = 0; i < n; i++) {
+//             tmp[i] = (x[i], y[i]);
+//         }
+//         var sortedTmp = tmp.OrderBy(p => p.x) // X 기준 오름차순
+//             .ThenByDescending(p => p.y) // Y 기준 내림차순
+//             .ToArray();
+//         int[] A = new int[n];
+//         for(int i = 0; i<n; i++)
+//         {
+//             A[i] = sortedTmp[i].y;
+//         }
+//         int ans = BinarySearch2(A);
+//         Console.WriteLine(ans);
+//     }
+//     static void BinarySearch(List<int> L, int a)
+//     {
+//         int top = L.Count-1; int bot = 0; int mid = (top+bot)/2;;
+//         while (top > bot)
+//         {
+//             if(L[mid] >= a)
+//             {
+//                 top = mid;
+//             }
+//             else
+//             {
+//                 bot = mid +1;
+//             }
+//             mid = (top+bot)/2;
+//         }
+//         L[mid] = a;
+//     }
+//     static int BinarySearch2(int[] L)
+//     {
+//         int nl = L.Length;
+//         List<int> a = new List<int>(); a.Add(L[0]);
+//         int large = 0;
+//         for(int i = 1; i<nl; i++)
+//         {
+//             if(a[large] < L[i])
+//             {
+//                 a.Add(L[i]);
+//                 large ++;
+//             }
+//             else
+//             {
+//                 BinarySearch(a,L[i]);
+//             }
+//         }
+//         return a.Count();
+//     }
+// }
 
 // class Q23
 // {
