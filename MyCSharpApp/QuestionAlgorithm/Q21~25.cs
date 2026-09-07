@@ -1,40 +1,40 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
-class Q25
-{
-    static void Main()
-    {
-        int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
-        int H = input[0];
-        int W = input[1];
-        string[] C = new string[H];
-        for(int i = 0; i < H; i++)
-        {
-            string input1 = Console.ReadLine()!;
-            C[i] = input1;
-        }
-        int[,] dp = new int[H,W];
-        for(int i = 0; i<H; i++) 
-        {
-            if(C[i][0] == '#') break;
-            dp[i,0] = 1;
-        }
-        for(int i = 0; i<W; i++)
-        {
-            if(C[0][i] == '#') break;
-            dp[0,i] = 1;  
-        } 
-        for(int i=1; i<H; i++)
-        {
-            for(int j=1; j<W; j++)
-            {
-                if(C[i][j] == '.') dp[i,j] = dp[i-1,j]+dp[i,j-1];
-            }
-        }
-        Console.WriteLine(dp[H-1,W-1]);
-    }
-}
+// using System;
+// using System.Linq;
+// using System.Collections.Generic;
+// class Q25
+// {
+//     static void Main()
+//     {
+//         int[] input = Console.ReadLine()!.Split(' ').Select(int.Parse).ToArray();
+//         int H = input[0];
+//         int W = input[1];
+//         string[] C = new string[H];
+//         for(int i = 0; i < H; i++)
+//         {
+//             string input1 = Console.ReadLine()!;
+//             C[i] = input1;
+//         }
+//         int[,] dp = new int[H,W];
+//         for(int i = 0; i<H; i++) 
+//         {
+//             if(C[i][0] == '#') break;
+//             dp[i,0] = 1;
+//         }
+//         for(int i = 0; i<W; i++)
+//         {
+//             if(C[0][i] == '#') break;
+//             dp[0,i] = 1;  
+//         } 
+//         for(int i=1; i<H; i++)
+//         {
+//             for(int j=1; j<W; j++)
+//             {
+//                 if(C[i][j] == '.') dp[i,j] = dp[i-1,j]+dp[i,j-1];
+//             }
+//         }
+//         Console.WriteLine(dp[H-1,W-1]);
+//     }
+// }
 // class Q24
 // {
 //     static void Main()
@@ -203,22 +203,22 @@ class Q25
 //     //     return dp[mask,now] = minCost;
 //     }
 // }
-class Nod
-{
-    public int X {get; set;}
-    public int Y {get; set;}
+// class Nod
+// {
+//     public int X {get; set;}
+//     public int Y {get; set;}
 
-    public Nod(int x, int y)
-    {
-        X = x;
-        Y = y;
-    }
-    public int NodLength(Nod a)
-    {
-        int ans = (int)Math.Sqrt(Math.Pow(a.X-X,2) + Math.Pow(a.Y-Y,2));
-        return ans;
-    }
-}
+//     public Nod(int x, int y)
+//     {
+//         X = x;
+//         Y = y;
+//     }
+//     public int NodLength(Nod a)
+//     {
+//         int ans = (int)Math.Sqrt(Math.Pow(a.X-X,2) + Math.Pow(a.Y-Y,2));
+//         return ans;
+//     }
+// }
 
 // class Q22{
 //     static void Main(){
