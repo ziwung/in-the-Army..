@@ -18,11 +18,26 @@ class Q30
         }
         return line[lineIdx++];
     }
+    public static int THENUM = 1000000007;
     private static int NextInt() => int.Parse(NextToken())!;
     private static char NextChar() => char.Parse(NextToken());
     static void Main()
     {
-        
+        int n = NextInt();
+        int r = NextInt();
+
+        int ans = Ncr(n,r);
+        sw.WriteLine(ans);
+        sw.Flush();
+    }
+    static int Ncr(int n, int r){
+        int res = 1;
+        (int max, int min) = (n>2*r)? (n-r,r) : (r,n-r);
+        for(int i = 1; i<=min; i++){
+            res *= max +i;
+            res /= i;
+        }
+        return res;
     }
 }
 // class Q29
