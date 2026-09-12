@@ -2,44 +2,65 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-class Q30
-{
-    private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
-    private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
-    private static  string[] line = new string[0];
-    private static int lineIdx = 0;
+// class Q30
+// {
+//     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+//     private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+//     private static  string[] line = new string[0];
+//     private static int lineIdx = 0;
 
-    private static string NextToken(){
-        while(lineIdx >= line.Length){
-            string s = sr.ReadLine()!;
-            if(s == null) return null;
-            line = s.Split(' ',StringSplitOptions.RemoveEmptyEntries);
-            lineIdx = 0;
-        }
-        return line[lineIdx++];
-    }
-    public static int THENUM = 1000000007;
-    private static int NextInt() => int.Parse(NextToken())!;
-    private static char NextChar() => char.Parse(NextToken());
-    static void Main()
-    {
-        int n = NextInt();
-        int r = NextInt();
+//     private static string NextToken(){
+//         while(lineIdx >= line.Length){
+//             string s = sr.ReadLine()!;
+//             if(s == null) return null!;
+//             line = s.Split(' ',StringSplitOptions.RemoveEmptyEntries);
+//             lineIdx = 0;
+//         }
+//         return line[lineIdx++];
+//     }
+//     public static long THENUM = 1000000007;
+//     private static int NextInt() => int.Parse(NextToken())!;
+//     private static char NextChar() => char.Parse(NextToken());
+//     static void Main()
+//     {
+//         // // A30
+//         // int n = NextInt();
+//         // int r = NextInt();
+//         // int ans = Ncr(n,r);
+//         // sw.WriteLine(ans);
+//         // sw.Flush();
 
-        int ans = Ncr(n,r);
-        sw.WriteLine(ans);
-        sw.Flush();
-    }
-    static int Ncr(int n, int r){
-        int res = 1;
-        (int max, int min) = (n>2*r)? (n-r,r) : (r,n-r);
-        for(int i = 1; i<=min; i++){
-            res *= max +i;
-            res /= i;
-        }
-        return res;
-    }
-}
+//         // B30
+//         int h = NextInt();
+//         int w = NextInt();
+//         long ans = Ncr(h+w-2,h-1);
+//         Console.WriteLine(ans);
+//     }
+//     static long Ncr(int n, int r){
+//         long res = 1;
+//         (long max, long min) = (n>2*r)? (n-r,r) : (r,n-r);
+//         for(long i = 1; i<=min; i++){
+//             res *= (max +i)%THENUM;
+//             res *= moduler(i);
+//         }
+//         return res%THENUM;
+//     }
+//     public static long moduler(long a){
+//         long ans = 1;
+//         long basic = a % THENUM;
+//         long exp = THENUM-2;
+//         while(exp > 0)
+//         {
+//             if((exp & 1) == 1)
+//             {
+//                 ans = (ans*basic)%THENUM;
+//             }
+//             basic = (basic*basic)%THENUM;
+//             exp >>= 1;
+//         }
+//         return ans%THENUM;
+//     }
+// }
 // class Q29
 // {
 //     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
