@@ -2,55 +2,155 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-class Q37
+class Q39
 {
-    private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
-    private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
-    private static  string[] line = new string[0];
-    private static int lineIdx = 0;
-    private static string NextToken(){
-        while(lineIdx >= line.Length){
-            string s = sr.ReadLine()!;
-            if(s == null) return null!;
-            line = s.Split(' ',StringSplitOptions.RemoveEmptyEntries);
-            lineIdx = 0;
-        }
-        return line[lineIdx++];
-    }
-    private static int NextInt() => int.Parse(NextToken())!;
-    static void Main()
-    {
-        // // A37
-        // int n = NextInt(); int m = NextInt(); int b = NextInt();
-        // int[] a = new int[n]; int[] c = new int[m];
-        // for(int i = 0; i< n; i++)
-        // {
-        //     a[i] = NextInt();
-        // }
-        // for(int i = 0; i<m; i++)
-        // {
-        //     c[i] = NextInt();
-        // }
-        // int sum = a.Sum()*m + c.Sum()*n + b*n*m;
-        // Console.WriteLine(sum);
-
-        // B37
-        long n = (long)NextInt();
-        long sum = 0;
-        for(long i = 1; i<=9; i++)
-        {
-            for(long j = 10; j<1000000000000000L; j *= 10) sum += i*(n/j);
-        }
-        for(long i = 10;  i<1000000000000000L; i *= 10)
-        {
-            for(int j = 1; j <= (n%i)/(i/10); j++)
-            {
-                sum += j;
-            }
-        }
-        Console.WriteLine(sum);
-    }
+    
 }
+// class Q38
+// {
+//     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+//     private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+//     private static  string[] line = new string[0];
+//     private static int lineIdx = 0;
+//     private static string NextToken(){
+//         while(lineIdx >= line.Length){
+//             string s = sr.ReadLine()!;
+//             if(s == null) return null!;
+//             line = s.Split(' ',StringSplitOptions.RemoveEmptyEntries);
+//             lineIdx = 0;
+//         }
+//         return line[lineIdx++];
+//     }
+//     private static int NextInt() => int.Parse(NextToken())!;
+//     static void Main()
+//     {
+//         // // A38
+//         // int D = NextInt(); int N = NextInt();
+//         // int[] L = new int[N];
+//         // int[] R = new int[N];
+//         // int[] H = new int[N];
+//         // for(int i = 0; i<N; i++){
+//         //     L[i] = NextInt();
+//         //     R[i] = NextInt();
+//         //     H[i] = NextInt();
+//         // }
+//         // //계산
+//         // int currin = 0; int curriend = R[0]; int sum = 0;
+//         // for(int i = 1; i<D; i++)
+//         // {
+//         //     if (i < curriend)
+//         //     {
+//         //         sum += H[currin];
+//         //     }
+//         //     else
+//         //     {
+//         //         int min = Math.Min(H[currin],H[currin+1]);
+//         //         sum += min;
+//         //         currin += 1;
+//         //         curriend = R[currin];
+//         //     }
+//         // }
+//         // sum += H[currin];
+//         // Console.WriteLine(sum);
+
+//         // B38
+//         int n = NextInt();
+//         int[] s = new int[n-1];
+//         int[] pluslim = new int[n]; pluslim[0] = 1;
+//         int[] minuslim = new int[n]; minuslim[0] = 1;
+//         s[0] = NextInt();
+//         for(int i = 1; i< n-1; i++)
+//         {
+//             s[i] = NextInt();
+//         }
+//         int count = 1;
+//         for(int i = 1; i<n; i++)
+//         {
+//             if(s[i-1] == 1)
+//             {
+//                 pluslim[i] = count++;
+//             }
+//             else
+//             {
+//                 pluslim[i] = 1;
+//                 count = 1;
+//             }
+//         }
+//         count = 1;
+//         for(int i = n-1; i>=0; i--)
+//         {
+//             if(s[i-1] == -1)
+//             {
+//                 minuslim[i] = count++;
+//             }
+//             else
+//             {
+//                 minuslim[i] = 1;
+//                 count = 1;
+//             }
+//         }
+//         int sum = 0;
+//         for(int i = 0; i<n; i++)
+//         {
+//             sum += Math.Max(pluslim[i],minuslim[i]);
+//         }
+//         Console.WriteLine(sum);
+//     }
+// }
+// class Q37
+// {
+//     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+//     private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+//     private static  string[] line = new string[0];
+//     private static int lineIdx = 0;
+//     private static string NextToken(){
+//         while(lineIdx >= line.Length){
+//             string s = sr.ReadLine()!;
+//             if(s == null) return null!;
+//             line = s.Split(' ',StringSplitOptions.RemoveEmptyEntries);
+//             lineIdx = 0;
+//         }
+//         return line[lineIdx++];
+//     }
+//     private static int NextInt() => int.Parse(NextToken())!;
+//     static void Main()
+//     {
+//         // // A37
+//         // int n = NextInt(); int m = NextInt(); int b = NextInt();
+//         // int[] a = new int[n]; int[] c = new int[m];
+//         // for(int i = 0; i< n; i++)
+//         // {
+//         //     a[i] = NextInt();
+//         // }
+//         // for(int i = 0; i<m; i++)
+//         // {
+//         //     c[i] = NextInt();
+//         // }
+//         // int sum = a.Sum()*m + c.Sum()*n + b*n*m;
+//         // Console.WriteLine(sum);
+
+//         // B37
+//         long n = (long)NextInt();
+//         long sum = 0;
+//         long maxC = 1;
+//         while(maxC <= n)
+//         {
+//             long higher = n / (maxC*10);
+//             long center = (n / maxC) %10;
+//             long lower = n % maxC;
+
+//             sum += higher * maxC * 45L;
+//             for(int i = 0; i<center; i++)
+//             {
+//                 sum += i*maxC;
+//             }
+//             sum += center*(lower+1);
+//             maxC *= 10;
+//         }
+        
+//         Console.WriteLine(sum);
+//     }
+// }
 // class Q36{
 //     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
 //     private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
