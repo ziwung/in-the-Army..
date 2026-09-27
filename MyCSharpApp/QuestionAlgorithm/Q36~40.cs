@@ -2,10 +2,112 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-class Q39
-{
-    
-}
+// class Q39
+// {
+//     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+//     private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+//     private static  string[] line = new string[0];
+//     private static int lineIdx = 0;
+//     private static string NextToken(){
+//         while(lineIdx >= line.Length){
+//             string s = sr.ReadLine()!;
+//             if(s == null) return null!;
+//             line = s.Split(' ',StringSplitOptions.RemoveEmptyEntries);
+//             lineIdx = 0;
+//         }
+//         return line[lineIdx++];
+//     }
+//     private static int NextInt() => int.Parse(NextToken())!;
+//     static void Main(){
+//         // //A39
+//         // int n = NextInt();
+//         // Tiumm[] ti = new Tiumm[n];
+//         // for(int i = 0; i<n; i++)
+//         // {
+//         //     ti[i] = new Tiumm();
+//         //     ti[i].start = NextInt();
+//         //     ti[i].end = NextInt();
+//         // }
+//         // ti.Sort();
+//         // int curri = 0; int next = 1; int count = 1;
+//         // while(next < n)
+//         // {
+//         //     if(ti[curri].end <= ti[next].start)
+//         //     {
+//         //         curri = next;
+//         //         count++;
+//         //     }
+//         //     next++;
+//         // }
+//         // Console.WriteLine(count);
+
+//         // B39
+//         int d = NextInt();
+//         int n = NextInt();
+//         Tiumm[] ti = new Tiumm[n];
+//         for(int i = 0; i<n; i++)
+//         {
+//             ti[i] = new Tiumm();
+//             ti[i].start = NextInt(); // 돈
+//             ti[i].end = NextInt(); // 날짜 (xi)
+//         }
+//         ti.Sort(); // 날짜 기준으로 정렬
+
+//         int ticount = 0; 
+//         int mounysum = 0; 
+//         PriorityQueue<int, int> til = new PriorityQueue<int, int>();
+
+//         for(int i = 1; i <= d; i++)
+//         {
+//             while (ticount + 1 < n && i >= ti[ticount + 1].end)
+//             {
+//                 ticount++;
+//                 til.Enqueue(ti[ticount].start, -ti[ticount].start); // 돈이 큰 순서대로 나오도록 음수 우선순위 지정
+//             }
+//             if (til.Count > 0)
+//             {
+//                 mounysum += til.Dequeue();
+//             }
+//         }
+//         Console.WriteLine(mounysum);
+//     }
+//     public class Tiumm : IComparable<Tiumm>
+//     {
+//         public int start;
+//         public int end;
+//         public Tiumm(int s, int e)
+//         {
+//             start = s;
+//             end = e;
+//         }
+//         public Tiumm()
+//         {
+//             start = 0;
+//             end = 0;
+//         }
+//         // A39용
+//         // public int CompareTo(Tiumm other)
+//         // {
+//         //     if (other == null) return 1;
+//         //     int result = this.end.CompareTo(other.end);
+//         //     if (result == 0)
+//         //     {
+//         //        return this.start.CompareTo(other.start);
+//         //     }
+//         //     return result;
+//         // }
+//         public int CompareTo(Tiumm other)
+//         {
+//             if (other == null) return 1;
+//             int result = this.end.CompareTo(other.end);
+//             if (result == 0)
+//             {
+//                return other.start.CompareTo(this.start);
+//             }
+//             return result;
+//         }
+//     }
+// }
 // class Q38
 // {
 //     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
