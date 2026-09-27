@@ -1,7 +1,70 @@
-using System;
-using System.IO;
-using System.Linq;
-using System.Collections.Generic;
+// using System;
+// using System.IO;
+// using System.Linq;
+// using System.Collections.Generic;
+// class Q40
+// {
+//     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+//     private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+//     private static  string[] line = new string[0];
+//     private static int lineIdx = 0;
+//     private static string NextToken(){
+//         while(lineIdx >= line.Length){
+//             string s = sr.ReadLine()!;
+//             if(s == null) return null!;
+//             line = s.Split(' ',StringSplitOptions.RemoveEmptyEntries);
+//             lineIdx = 0;
+//         }
+//         return line[lineIdx++];
+//     }
+//     private static int NextInt() => int.Parse(NextToken())!;
+//     static void Main()
+//     {
+//         // // A40
+//         // int sum = 0;
+//         // int n = NextInt(); int[] a = new int[n]; int[] count = new int[101]; int max = 0;
+//         // for(int i = 0; i<n; i++)
+//         // {
+//         //     a[i] = NextInt();
+//         //     count[a[i]]+=1;
+//         //     if(max < a[i]) max = a[i];
+//         // }
+//         // for(int i = 1; i<=max; i++)
+//         // {
+//         //     if(count[i] >= 3)
+//         //     {
+//         //         sum += Nc3(count[i]);
+//         //     }
+//         // }
+//         // Console.WriteLine(sum);
+
+//         // B40
+//         int sum = 0;
+//         int n = NextInt(); int[] a = new int[n]; int[] count = new int[101]; int max = 0;
+//         for(int i = 0; i<n; i++)
+//         {
+//             a[i] = NextInt();
+//             count[a[i]%100]+=1;
+//         }
+//         for(int i = 1; i<=49; i++)
+//         {
+//             sum += count[i] * count[100-i];
+//         }
+//         sum += count[50] * (count[50]-1);
+//         sum += count[0] * (count[0]-1);
+//         Console.WriteLine(sum);
+//     }
+//     static public int Nc3(int a)
+//     {
+//         int sum = 1;
+//         for(int i = 1;i<=a-3; i++)
+//         {
+//             sum *= i+3;
+//             sum /= i;
+//         }
+//         return sum;
+//     }
+// }
 // class Q39
 // {
 //     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
@@ -10,7 +73,7 @@ using System.Collections.Generic;
 //     private static int lineIdx = 0;
 //     private static string NextToken(){
 //         while(lineIdx >= line.Length){
-//             string s = sr.ReadLine()!;df
+//             string s = sr.ReadLine()!;
 //             if(s == null) return null!;
 //             line = s.Split(' ',StringSplitOptions.RemoveEmptyEntries);
 //             lineIdx = 0;
