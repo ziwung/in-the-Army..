@@ -10,7 +10,7 @@ using System.Collections.Generic;
 //     private static int lineIdx = 0;
 //     private static string NextToken(){
 //         while(lineIdx >= line.Length){
-//             string s = sr.ReadLine()!;
+//             string s = sr.ReadLine()!;df
 //             if(s == null) return null!;
 //             line = s.Split(' ',StringSplitOptions.RemoveEmptyEntries);
 //             lineIdx = 0;
