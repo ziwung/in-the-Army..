@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-class Q42
+class Q43
 {
     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
     private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
@@ -23,6 +23,112 @@ class Q42
         
     }
 }
+// class Q42
+// {
+//     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+//     private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+//     private static  string[] line = new string[0];
+//     private static int lineIdx = 0;
+//     private static string NextToken(){
+//         while(lineIdx >= line.Length){
+//             string s = sr.ReadLine()!;
+//             if(s == null) return null!;
+//             line = s.Split(' ',StringSplitOptions.RemoveEmptyEntries);
+//             lineIdx = 0;
+//         }
+//         return line[lineIdx++];
+//     }
+//     private static int NextInt() => int.Parse(NextToken())!;
+//     static void Main()
+//     {
+//         // // A42
+//         // int n = NextInt();
+//         // int k = NextInt();
+//         // int[,] total = new int[101,101];
+//         // int[,] total1 = new int[101,101];
+//         // for(int i = 0; i<n; i++)
+//         // {
+//         //     int x = NextInt();
+//         //     int y = NextInt();
+//         //     total[x,y]+=1;
+//         // }
+//         // for(int i = 1; i <= 100; i++)
+//         // {
+//         //     for(int j = 1; j<=100; j++)
+//         //     {
+//         //         total1[i,j] = total[i,j]+total1[i-1,j]+total1[i,j-1]-total1[i-1,j-1];
+//         //     }
+//         // }
+//         // int ans = 0;
+//         // for(int a = 1; a<=100-k; a++)
+//         // {
+//         //     for(int b = 1; b<=100-k; b++)
+//         //     {
+//         //         int score = total1[a-1,b-1] - total1[a+k,b-1] - total1[a-1,b+k] + total1[a+k,b+k];
+//         //         ans = Math.Max(ans,score);
+//         //     }
+//         // }
+//         // Console.WriteLine(ans);
+
+//         // B42
+//         // 앞뒤 ++ -- +- -+ 4가지정도
+//         //그럼 높은거 기준으로 잡냐 아님 낮은거 아님 오른쪽 왼쪽 이렇게 4가지 경우를 보면 될듯? - 그건 아니지 반례가 있음
+//         //잠깐 어차피 +-든 다 더하는거니까 ++기준일땐 둘이 더해서 최대 +-기준일땐 a엔 + b엔 -곱해서 더하면 가중치가 올바르게 원하는데로 작동하지 않을까?
+//         int n = NextInt();
+//         int[] a = new int[n];
+//         int[] b = new int[n];
+//         for(int i=0; i<n; i++)
+//         {
+//             a[i] = NextInt();
+//             b[i] = NextInt();
+//         }
+//         int[] sumCount = new int[n]; int ans = 0; int cum = 0;
+//         for(int i=0; i<n; i++) //++일 경우
+//         {
+//             sumCount[i] = a[i]+b[i];
+//         }
+//         Array.Sort(sumCount);
+//         for(int i=n-1; i>=0; i--)
+//         {
+//             cum += sumCount[i];
+//             ans = Math.Max(ans,cum);
+//         }
+//         cum = 0;
+//         for(int i=0; i<n; i++) //+-일 경우
+//         {
+//             sumCount[i] = a[i]+(-b[i]);
+//         }
+//         Array.Sort(sumCount);
+//         for(int i=n-1; i>=0; i--)
+//         {
+//             cum += sumCount[i];
+//             ans = Math.Max(ans,cum);
+//         }
+//         cum = 0;
+//         for(int i=0; i<n; i++) //-+일 경우
+//         {
+//             sumCount[i] = (-a[i])+b[i];
+//         }
+//         Array.Sort(sumCount);
+//         for(int i=n-1; i>=0; i--)
+//         {
+//             cum += sumCount[i];
+//             ans = Math.Max(ans,cum);
+//         }
+//         cum = 0;
+//         for(int i=0; i<n; i++) //--일 경우
+//         {
+//             sumCount[i] = -a[i]-b[i];
+//         }
+//         Array.Sort(sumCount);
+//         for(int i=n-1; i>=0; i--)
+//         {
+//             cum += sumCount[i];
+//             ans = Math.Max(ans,cum);
+//         }
+//         Console.WriteLine(ans);
+//     }
+// }
 // class Q41
 // {
 //     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
