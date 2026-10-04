@@ -18,9 +18,39 @@ class Q43
         return line[lineIdx++];
     }
     private static int NextInt() => int.Parse(NextToken())!;
+    private static char NextChar() => char.Parse(NextToken())!;
     static void Main()
     {
-        
+        // // A43
+        // int n = NextInt();
+        // int l = NextInt();
+        // List<int> e = new List<int>(); List<int> w = new List<int>();
+        // for(int i =0; i<n; i++){
+        //     int a = NextInt();
+        //     char b = NextChar();
+        //     if(b=='E') e.Add(a);
+        //     else w.Add(a);
+        // }
+        // int eMin = e.Min();
+        // int wMax = w.Max();
+        // int ans = (l-eMin>wMax)? l-eMin:wMax;
+        // Console.WriteLine(ans);
+
+        // B43
+        int n = NextInt(); // 학생수
+        int m = NextInt(); // 문제수
+        int[] student = new int[n]; //학생별 점수 기록
+        Array.Fill(student,m); //각 학생 문제다맞췄다는 가정
+        for(int i = 0; i<m; i++)
+        {
+            student[NextInt()]--; // 문제별 못맞친 학생 번호 깎기
+        }
+        int j = 0;
+        foreach(int a in student)
+        {
+            Console.WriteLine($"{j} 번째 학생의 점수 {a}");
+            j++;
+        }
     }
 }
 // class Q42
