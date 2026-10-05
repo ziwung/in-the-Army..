@@ -1,81 +1,147 @@
-using System;
-using System.IO;
-using System.Linq;
-using System.Collections.Generic;
-class Q44{
-    private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
-    private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
-    private static  string[] line = new string[0];
-    private static int lineIdx = 0;
-    private static string NextToken(){
-        while(lineIdx >= line.Length){
-            string s = sr.ReadLine()!;
-            if(s == null) return null!;
-            line = s.Split(' ',StringSplitOptions.RemoveEmptyEntries);
-            lineIdx = 0;
-        }
-        return line[lineIdx++];
-    }
-    private static int NextInt() => int.Parse(NextToken())!;
-    private static char NextChar() => char.Parse(NextToken())!;
-    static void Main()
-    {
-        // // A44
-        // int n = NextInt();
-        // int q = NextInt();
-        // int[] A = new int[n];
-        // for(int i = 0; i<n; i++) A[i] = i+1; 
-        // int status = 1; 
-        // for(int i =0; i < q; i++)
-        // {
-        //     int a = NextInt();
-        //     if (a == 1)
-        //     {
-        //         if(status == 1) A[NextInt()-1] = NextInt();
-        //         else A[n-NextInt()] = NextInt();
-        //     }
-        //     else if (a == 2)
-        //     {
-        //         status *= -1;
-        //     }
-        //     else
-        //     {
-        //         if(status == 1) Console.WriteLine(A[NextInt()-1]);
-        //         else Console.WriteLine(A[n-NextInt()]);
-        //     }
-        // }
+// using System;
+// using System.IO;
+// using System.Linq;
+// using System.Collections.Generic;
+// class Q45{
+//     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+//     private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+//     private static  string[] line = new string[0];
+//     private static int lineIdx = 0;
+//     private static string NextToken(){
+//         while(lineIdx >= line.Length){
+//             string s = sr.ReadLine()!;
+//             if(s == null) return null!;
+//             line = s.Split(' ',StringSplitOptions.RemoveEmptyEntries);
+//             lineIdx = 0;
+//         }
+//         return line[lineIdx++];
+//     }
+//     private static int NextInt() => int.Parse(NextToken())!;
+//     private static char NextChar() => char.Parse(NextToken())!;
+//     static void Main(){
+//         // // A45 (별5개문제 풀이 안보고 품~!)
+//         // // 아니 전부 흰으로 직결되잖슴; 11, 22, 33, 44, 55, 66, 03, 14, 25, 36, 47. 17, 06 
+//         // // 규칙 두 숫자 동일x 두수 차이가 3의배수이면 안됨 (그렇다면 흰색으로 귀결)
+//         // // 그렇다면 다른예시들을 살펴보자 12 무조건 2인수만 나옴 23 04 31 전부 12로 귀결 
+//         // // 자 가정을 세워봅시다 1,4,7,10 이렇게 차이값을 3으로 나눴을때 나머지가 1이 나오는 수들은 더 큰수의 수가 뜬다 12,23,04,15
+//         // // 2,5,8,11 이렇게 차이값을 3으로 나눴을때 나머지가 2가 나오는 수들은 더 작은수가 뜬다 31 20아 깨닳았다 이 세계의 진리..
+//         // // 그렇다는건 0,3,6,9이렇게 3나눴을때 나눠떨어지는수는 시발 흰색이 뜬다?! 키아아아아악
+//         // int n = NextInt();
+//         // string c = NextToken();
+//         // string input = NextToken();
+//         // int wCount = 0; int rCount = 0; int bCount = 0; 
+//         // for(int i = 0; i<n; i++){
+//         //     switch (input[i])
+//         //     {
+//         //         case'W':
+//         //             wCount++;
+//         //             break;
+//         //         case'B':
+//         //             bCount++;
+//         //             break;
+//         //         case'R':
+//         //             rCount++;
+//         //             break;
+//         //     }
+//         // } 
+//         // string ans;
+//         // if(rCount>0||bCount>0){
+//         //     int temp = Math.Abs(rCount-bCount);
+//         //     if(temp%3 == 0) ans = "W";
+//         //     else if(temp%3 == 1) ans = (rCount>bCount)? "R":"B";
+//         //     else ans =  (rCount>bCount)? "B":"R";
+//         // }
+//         // else
+//         // {
+//         //     ans = "W";
+//         // }
+//         // if (ans == c)
+//         // {
+//         //     Console.WriteLine("yes");
+//         // }else Console.WriteLine("No");
 
-        // B44
-        int n = NextInt();
-        int q = NextInt();
-        int[,] A = new int[n,n]; int count = 1;
-        for(int i = 0; i<n; i++){ 
-            for(int j = 0; j<n; j++)
-            {
-                A[i,j] = count++;    
-            }
-        }
-        int[] status = new int[n]; 
-        for(int i = 0; i<n; i++) status[i+1] = i+1;
-        for(int i =0; i < q; i++)
-        {
-            int a = NextInt();
-            if (a == 1)
-            {
-                int ab = NextInt();
-                int bc = NextInt();
-                int temp = status[ab];
-                status[ab] = status[bc];
-                status[bc] = temp;
-            }
-            else
-            {
-                int x = NextInt();
-                Console.WriteLine(A[status[x],NextInt()]);
-            }
-        }
-    }
-}
+//         // B45
+//         int a = NextInt();
+//         int b = NextInt();
+//         int c = NextInt();
+//         if(a+b+c == 0) Console.WriteLine("yes");
+//         else Console.WriteLine("No");
+//     }
+// }
+// class Q44{
+//     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
+//     private static StreamWriter sw = new StreamWriter(new BufferedStream(Console.OpenStandardOutput()));
+//     private static  string[] line = new string[0];
+//     private static int lineIdx = 0;
+//     private static string NextToken(){
+//         while(lineIdx >= line.Length){
+//             string s = sr.ReadLine()!;
+//             if(s == null) return null!;
+//             line = s.Split(' ',StringSplitOptions.RemoveEmptyEntries);
+//             lineIdx = 0;
+//         }
+//         return line[lineIdx++];
+//     }
+//     private static int NextInt() => int.Parse(NextToken())!;
+//     private static char NextChar() => char.Parse(NextToken())!;
+//     static void Main()
+//     {
+//         // // A44
+//         // int n = NextInt();
+//         // int q = NextInt();
+//         // int[] A = new int[n];
+//         // for(int i = 0; i<n; i++) A[i] = i+1; 
+//         // int status = 1; 
+//         // for(int i =0; i < q; i++)
+//         // {
+//         //     int a = NextInt();
+//         //     if (a == 1)
+//         //     {
+//         //         if(status == 1) A[NextInt()-1] = NextInt();
+//         //         else A[n-NextInt()] = NextInt();
+//         //     }
+//         //     else if (a == 2)
+//         //     {
+//         //         status *= -1;
+//         //     }
+//         //     else
+//         //     {
+//         //         if(status == 1) Console.WriteLine(A[NextInt()-1]);
+//         //         else Console.WriteLine(A[n-NextInt()]);
+//         //     }
+//         // }
+
+//         // B44
+//         int n = NextInt();
+//         int q = NextInt();
+//         int[,] A = new int[n,n]; int count = 1;
+//         for(int i = 0; i<n; i++){ 
+//             for(int j = 0; j<n; j++)
+//             {
+//                 A[i,j] = count++;    
+//             }
+//         }
+//         int[] status = new int[n]; 
+//         for(int i = 0; i<n; i++) status[i+1] = i+1;
+//         for(int i =0; i < q; i++)
+//         {
+//             int a = NextInt();
+//             if (a == 1)
+//             {
+//                 int ab = NextInt();
+//                 int bc = NextInt();
+//                 int temp = status[ab];
+//                 status[ab] = status[bc];
+//                 status[bc] = temp;
+//             }
+//             else
+//             {
+//                 int x = NextInt();
+//                 Console.WriteLine(A[status[x],NextInt()]);
+//             }
+//         }
+//     }
+// }
 // class Q43
 // {
 //     private static StreamReader sr = new StreamReader(new BufferedStream(Console.OpenStandardInput()));
