@@ -20,6 +20,7 @@ class Q56_60{
     public static int B = 31;
     public static int M = 10007;
     private static int NextInt() => int.Parse(NextToken())!;
+    private static long NextLong() => long.Parse(NextToken()!);
     static void Main()
     {
         // // A56
@@ -61,21 +62,66 @@ class Q56_60{
         //     } else Console.WriteLine("회문 아님");
         // }
 
-        // A57
+        // // A57
+        // int N = NextInt();
+        // int Q = NextInt();
+        // int[,] dp = new int[29,N]; //2^29일 N개의 구멍
+        // for(int i = 0; i<N; i++)
+        // {
+        //     dp[0,i] = NextInt();
+        // }
+        // for(int i = 1; i<29; i++)
+        // {
+        //     for(int j = 0; j<N; j++)
+        //     {
+        //         dp[i,j] = dp[i-1,(dp[i-1,j]-1)];
+        //     }
+        // }
+        // for(int i = 0; i<Q; i++)
+        // {
+        //     int startHoll = NextInt()-1;
+        //     long day = NextLong();
+        //     int k = 0;
+        //     while((1L<<k) <= day)
+        //     {
+        //         if((day&1L << k) > 0)
+        //         {
+        //             startHoll = dp[k,startHoll]-1;
+        //         }
+        //         k++;
+        //     }
+        //     Console.WriteLine(startHoll+1);
+        // }
+
+        // B57
         int N = NextInt();
         int Q = NextInt();
-        int[] A = new int[N];
-        int[,] dp = new int[29,N]; //29일 N개의 구멍
-        for(int i = 0; i<29; i++)
+        int[,] dp = new int[29,N+1];
+        for(int i = 1; i<=N; i++)
         {
-            for(int j = 0; j<N; j++)
+            int now = i;
+            int temp = 0;
+            while(now != 0)
             {
-                
+                temp -= now%10;
+                now /= 10; 
             }
+            dp[0,i] = now + temp;
         }
         for(int i = 0; i<Q; i++)
         {
-            
+            int K = NextInt();
+            int wanna = NextInt();
+            int k = 0;
+            while((1L<<k) <= K)
+            {
+                if((K&1L << k) > 0)
+                {
+                    wanna = dp[k,wanna];
+                }
+                k++;
+            }
+            Console.WriteLine(wanna);
         }
     }
     static int CulHash(int[] hashcode, int start, int end)
