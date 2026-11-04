@@ -93,36 +93,73 @@ class Q56_60{
         //     Console.WriteLine(startHoll+1);
         // }
 
-        // B57
+        // // B57
+        // int N = NextInt();
+        // int Q = NextInt();
+        // int[,] dp = new int[29,N+1];
+        // for(int i = 1; i<=N; i++)
+        // {
+        //     int now = i;
+        //     int temp = 0;
+        //     while(now != 0)
+        //     {
+        //         temp -= now%10;
+        //         now /= 10; 
+        //     }
+        //     dp[0,i] = now + temp;
+        // }
+        // for(int i = 0; i<Q; i++)
+        // {
+        //     int K = NextInt();
+        //     int wanna = NextInt();
+        //     int k = 0;
+        //     while((1L<<k) <= K)
+        //     {
+        //         if((K&1L << k) > 0)
+        //         {
+        //             wanna = dp[k,wanna];
+        //         }
+        //         k++;
+        //     }
+        //     Console.WriteLine(wanna);
+        // }
+
+        // A58 (세그먼트 트리 RMQ)
         int N = NextInt();
         int Q = NextInt();
-        int[,] dp = new int[29,N+1];
-        for(int i = 1; i<=N; i++)
+        int len = 2;
+        while(N > len)
         {
-            int now = i;
-            int temp = 0;
-            while(now != 0)
-            {
-                temp -= now%10;
-                now /= 10; 
-            }
-            dp[0,i] = now + temp;
+            len *= 2;
         }
+        int[] narray = new int[len*2];
         for(int i = 0; i<Q; i++)
         {
-            int K = NextInt();
-            int wanna = NextInt();
-            int k = 0;
-            while((1L<<k) <= K)
+            if(NextToken() == "1")
             {
-                if((K&1L << k) > 0)
-                {
-                    wanna = dp[k,wanna];
-                }
-                k++;
-            }
-            Console.WriteLine(wanna);
+                PushNum(len, narray,NextInt(),NextInt());
+            }else Console.WriteLine(Quary(narray,NextInt(),NextInt(),1,len,1));
         }
+    }
+    static void PushNum (int N, int[] array, int pos, int num)
+    {
+        int temp = N+pos-1;
+        array[temp] = num;
+        temp = temp/2;
+        while(temp != 1)
+        {
+            array[temp] = Math.Max(array[temp*2],array[temp*2+1]);
+            temp /= 2;
+        }
+    }
+    static int Quary (int[] array,int l, int r, int a, int b, int u)
+    {
+        if(r <= a || l >= b) return -1000000;
+        if(l <= a && b <= r) return array[u];
+        int m = (a+b)/2;
+        int ans1 = Quary(array,l,r,a,m,u*2);
+        int ans2 = Quary(array,l,r,m+1,b,u*2+1);
+        return Math.Max(ans1,ans2);
     }
     static int CulHash(int[] hashcode, int start, int end)
     {
