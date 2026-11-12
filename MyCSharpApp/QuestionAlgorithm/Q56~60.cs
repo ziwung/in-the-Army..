@@ -142,47 +142,82 @@ class Q56_60{
         //     }else Console.WriteLine(Quary(narray,NextInt(),NextInt(),1,len,1));
         // }
 
-        // B58
+        // // B58
+        // int N = NextInt();
+        // int len = 2;
+        // while(N > len)
+        // {
+        //     len *= 2;
+        // }
+        // int[] X = new int[N];
+        // int[] dp = new int[len*2];
+        // for(int i = 0; i < N; i++){
+        //     X[i] = NextInt(); 
+        //     dp[i] = 1000000; //dp초기화
+        // }
+        // for(int i = 0; i < N; i++){
+        //     X[i] = NextInt();
+        //     UpdateTree(len, dp, i, 1000000); 
+        // }
+        // int L = NextInt();
+        // int R = NextInt();
+        // UpdateTree(len, dp, 0, 0);
+
+        // for (int i = 1; i < N; i++)
+        // {
+        //     // X[i] - R 이상, X[i] - L 이하인 범위를 이진 탐색으로 찾기
+        //     int min_target = X[i] - R;
+        //     int max_target = X[i] - L;
+
+        //     int lower_idx = HighBinarySearch(X, min_target, i - 1, 0); // 하한 (이상)
+        //     int upper_idx = LowBinarySearch(X, max_target, i - 1, 0);  // 상한 (이하)
+
+        //     if (lower_idx != -1 && upper_idx != -1 && lower_idx <= upper_idx)
+        //     {
+        //         int min_prev = MinQuary(dp, lower_idx, upper_idx, 0, len - 1, 1);
+        //         if (min_prev != 1000000)
+        //         {
+        //             UpdateTree(len, dp, i, min_prev + 1);
+        //         }
+        //     }
+        // }
+        // Console.WriteLine(dp[len+N-1]);
+
+        // // A59
+        // int N = NextInt();
+        // int Q = NextInt();
+        // int len = 2;
+        // while(N > len)
+        // {
+        //     len *= 2;
+        // }
+        // int[] narray = new int[len*2];
+        // for(int i = 0; i<Q; i++)
+        // {
+        //     if(NextToken() == "1")
+        //     {
+        //         PushNum2(len, narray,NextInt(),NextInt());
+        //     }else Console.WriteLine(Quary2(narray,NextInt(),NextInt(),1,len,1));
+        // }
+
+        //B59
         int N = NextInt();
         int len = 2;
         while(N > len)
         {
             len *= 2;
         }
-        int[] X = new int[N];
-        int[] dp = new int[len*2];
-        for(int i = 0; i < N; i++){
-            X[i] = NextInt(); 
-            dp[i] = 1000000; //dp초기화
+        int[] carray = new int[len*2];
+        int ans = 0;
+        int temp = Nextint()
+        UpdateTree(N,carray,temp-1,++carray[N+temp-1]);
+        for(int i = 1; i < N; i++){
+            int temp1 = Nextint()
+            UpdateTree(N,carray,temp1-1,++carray[N+temp1-1]);
+            ans += Quary2(carray, temp1+1, N,1,len,1);
         }
-        for(int i = 0; i < N; i++){
-            X[i] = NextInt();
-            UpdateTree(len, dp, i, 1000000); 
-        }
-        int L = NextInt();
-        int R = NextInt();
-        UpdateTree(len, dp, 0, 0);
-
-        for (int i = 1; i < N; i++)
-        {
-            // X[i] - R 이상, X[i] - L 이하인 범위를 이진 탐색으로 찾기
-            int min_target = X[i] - R;
-            int max_target = X[i] - L;
-
-            int lower_idx = HighBinarySearch(X, min_target, i - 1, 0); // 하한 (이상)
-            int upper_idx = LowBinarySearch(X, max_target, i - 1, 0);  // 상한 (이하)
-
-            if (lower_idx != -1 && upper_idx != -1 && lower_idx <= upper_idx)
-            {
-                int min_prev = MinQuary(dp, lower_idx, upper_idx, 0, len - 1, 1);
-                if (min_prev != 1000000)
-                {
-                    UpdateTree(len, dp, i, min_prev + 1);
-                }
-            }
-        }
-        Console.WriteLine(dp[len+N-1]);
-}
+        Console.WriteLine(ans);
+    }
     static int LowBinarySearch(int[] arr, int target, int top, int bot)
     {
         while(bot<top){
@@ -226,6 +261,17 @@ class Q56_60{
             temp /= 2;
         }
     }
+    static void PushNum2 (int N, int[] array, int pos, int num)
+    {
+        int temp = N+pos-1;
+        array[temp] = num;
+        temp = temp/2;
+        while(temp != 1)
+        {
+            array[temp] = array[temp*2]+array[temp*2+1];
+            temp /= 2;
+        }
+    }
     static void UpdateTree(int N, int[] array, int pos, int num)
     {
         int temp = N + pos;
@@ -245,6 +291,15 @@ class Q56_60{
         int ans1 = Quary(array,l,r,a,m,u*2);
         int ans2 = Quary(array,l,r,m+1,b,u*2+1);
         return Math.Max(ans1,ans2);
+    }
+    static int Quary2 (int[] array,int l, int r, int a, int b, int u)
+    {
+        if(r <= a || l >= b) return 0;
+        if(l <= a && b <= r) return array[u];
+        int m = (a+b)/2;
+        int ans1 = Quary2(array,l,r,a,m,u*2);
+        int ans2 = Quary2(array,l,r,m+1,b,u*2+1);
+        return ans1+ ans2;
     }
         static int MinQuary (int[] array,int l, int r, int a, int b, int u)
     {
